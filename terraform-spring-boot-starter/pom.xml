@@ -1,31 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.microsoft.terraform</groupId>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.4</version>
+  </parent>
+
+  <groupId>org.terrakube.terraform</groupId>
   <artifactId>terraform-spring-boot-starter</artifactId>
-  <version>1.0.0</version>
+  <version>${revision}</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+    <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.6.2</maven-javadoc-plugin.version>
+    <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+    <revision>0.16.0</revision>
+    <maven.deploy.skip>false</maven.deploy.skip>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
 
   <name>Terraform Spring Boot Starter</name>
   <description>Terraform starter, including auto-configuration support.</description>
-  <url>https://github.com/Microsoft/terraform-spring-boot</url>
-
-  <scm>
-    <connection>scm:git:git://github.com/Microsoft/terraform-spring-boot.git</connection>
-    <developerConnection>scm:git:ssh://github.com:Microsoft/terraform-spring-boot.git</developerConnection>
-    <url>https://github.com/Microsoft/terraform-spring-boot/tree/master</url>
-  </scm>
+  <url>https://github.com/AzBuilder/terraform-spring-boot</url>
 
   <licenses>
     <license>
       <name>MIT</name>
-      <url>https://github.com/Microsoft/terraform-spring-boot/blob/master/LICENSE</url>
+      <url>https://github.com/AzBuilder/terraform-spring-boot/blob/master/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <organization>
-    <name>Microsoft</name>
-    <url>https://www.microsoft.com</url>
+    <name>Terrakube</name>
+    <url>https://terrakube.org/</url>
   </organization>
 
   <developers>
@@ -34,45 +46,52 @@
       <name>Junyi Yi</name>
       <email>junyi@microsoft.com</email>
     </developer>
+    <developer>
+      <id>alfespa17</id>
+      <name>Alfredo España</name>
+      <email>alfespa17@gmail.com</email>
+    </developer>
   </developers>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <azterraform.version>1.0.0</azterraform.version>
-    <springboot.version>1.5.10.RELEASE</springboot.version>
-  </properties>
+  <scm>
+    <connection>scm:git:git://github.com/AzBuilder/terraform-spring-boot.git</connection>
+    <developerConnection>scm:git:ssh://github.com/AzBuilder/terraform-spring-boot.git</developerConnection>
+    <url>http://github.com/AzBuilder/terraform-spring-boot/tree/master</url>
+  </scm>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <version>${springboot.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.microsoft.terraform</groupId>
-      <artifactId>terraform-spring-boot-autoconfigure</artifactId>
-      <version>${azterraform.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.microsoft.terraform</groupId>
-      <artifactId>terraform-client</artifactId>
-      <version>${azterraform.version}</version>
-    </dependency>
-  </dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <plugins>
       <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>${nexus-staging-maven-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>${maven-source-plugin.version}</version>
         <executions>
           <execution>
             <id>attach-sources</id>
             <goals>
-              <goal>jar</goal>
+              <goal>jar-no-fork</goal>
             </goals>
           </execution>
         </executions>
@@ -80,7 +99,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${maven-javadoc-plugin.version}</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -90,6 +109,46 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>${maven-gpg-plugin.version}</version>
+        <configuration>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+        </configuration>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.terrakube.terraform</groupId>
+      <artifactId>terraform-spring-boot-autoconfigure</artifactId>
+      <version>${revision}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.terrakube.terraform</groupId>
+      <artifactId>terraform-client</artifactId>
+      <version>${revision}</version>
+    </dependency>
+  </dependencies>
+
 </project>

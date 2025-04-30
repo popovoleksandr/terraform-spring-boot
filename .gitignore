@@ -36,3 +36,6 @@ target/
 *.tfstate
 *.tfstate.backup
 .terraform/
+
+Main.java
+.DS_Store

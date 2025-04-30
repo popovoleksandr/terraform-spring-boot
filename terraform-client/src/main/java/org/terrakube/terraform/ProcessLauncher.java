@@ -1,4 +1,4 @@
-package com.microsoft.terraform;
+package org.terrakube.terraform;
 
 import java.io.*;
 import java.util.*;
@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 
-final class ProcessLauncher {
+public final class ProcessLauncher {
     private Process process;
     private ProcessBuilder builder;
     private Consumer<String> outputListener, errorListener;
@@ -38,6 +38,11 @@ final class ProcessLauncher {
     void setDirectory(File directory) {
         assert this.process == null;
         this.builder.directory(directory);
+    }
+    
+    void setRedirectErrorStream(boolean redirectErrorStream) {
+        assert this.process == null;
+        this.builder.redirectErrorStream(redirectErrorStream);
     }
 
     void appendCommands(String... commands) {
@@ -82,6 +87,7 @@ final class ProcessLauncher {
             try {
                 return this.process.waitFor();
             } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
                 throw new RuntimeException(ex);
             }
         }, this.executor);

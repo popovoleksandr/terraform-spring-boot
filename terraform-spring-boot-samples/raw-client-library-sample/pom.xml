@@ -1,64 +1,61 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.microsoft.terraform.samples</groupId>
-  <artifactId>terraform-raw-client-lib</artifactId>
-  <version>1.0.0</version>
-  <packaging>jar</packaging>
+    <parent>
+        <groupId>org.terrakube.terraform</groupId>
+        <artifactId>terraform-samples</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
-  <name>Using raw Terraform client library sample</name>
-  <url>https://github.com/Microsoft/terraform-spring-boot</url>
+    <groupId>org.terrakube.terraform</groupId>
+    <artifactId>terraform-raw-client-lib-sample</artifactId>
+    <version>${revision}</version>
+    <packaging>jar</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <name>Using raw Terraform client library sample</name>
+    <url>https://github.com/AzBuilder/terraform-spring-boot</url>
 
-  <scm>
-    <connection>scm:git:git://github.com/Microsoft/terraform-spring-boot.git</connection>
-    <developerConnection>scm:git:ssh://github.com:Microsoft/terraform-spring-boot.git</developerConnection>
-    <url>https://github.com/Microsoft/terraform-spring-boot/tree/master</url>
-  </scm>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <revision>0.16.0</revision>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>https://github.com/Microsoft/terraform-spring-boot/blob/master/LICENSE</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://github.com/Microsoft/terraform-spring-boot/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-  <organization>
-    <name>Microsoft</name>
-    <url>https://www.microsoft.com</url>
-  </organization>
+    <organization>
+        <name>Microsoft</name>
+        <url>https://www.microsoft.com</url>
+    </organization>
 
-  <developers>
-    <developer>
-      <id>JunyiYi</id>
-      <name>Junyi Yi</name>
-      <email>junyi@microsoft.com</email>
-    </developer>
-  </developers>
+    <developers>
+        <developer>
+            <id>JunyiYi</id>
+            <name>Junyi Yi</name>
+            <email>junyi@microsoft.com</email>
+        </developer>
+        <developer>
+            <id>alfespa17</id>
+            <name>Alfredo España</name>
+            <email>alfespa17@gmail.com</email>
+        </developer>
+    </developers>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.microsoft.terraform</groupId>
-      <artifactId>terraform-client</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.terrakube.terraform</groupId>
+            <artifactId>terraform-client</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 </project>
