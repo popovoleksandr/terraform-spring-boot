@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.terrakube.terraform</groupId>
-  <artifactId>terraform-solution</artifactId>
+  <groupId>in.popov.terraform</groupId>
+  <artifactId>terraform-spring-boot-solution</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
 
   <name>Terraform Spring Boot Starter for Terrakube</name>
-  <url>https://github.com/AzBuilder/terraform-spring-boot</url>
+  <url>https://github.com/popovoleksandr/terraform-spring-boot</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <revision>0.16.0</revision>
-    <sonar.organization>azbuilder</sonar.organization>
+    <sonar.organization>popov</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
@@ -20,14 +20,14 @@
   <licenses>
     <license>
       <name>MIT</name>
-      <url>https://github.com/AzBuilder/terraform-spring-boot/blob/master/LICENSE</url>
+      <url>https://github.com/popovoleksandr/terraform-spring-boot/blob/master/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <organization>
-    <name>Terrakube</name>
-    <url>https://terrakube.org/</url>
+    <name>Oleksandr Popov</name>
+    <url>https://popov.in/</url>
   </organization>
 
   <developers>
@@ -40,6 +40,11 @@
       <id>alfespa17</id>
       <name>Alfredo España</name>
       <email>alfespa17@gmail.com</email>
+    </developer>
+    <developer>
+      <id>popovoleksandr</id>
+      <name>Oleksandr Popov</name>
+      <email>oleksandr@popov.in</email>
     </developer>
   </developers>
 
